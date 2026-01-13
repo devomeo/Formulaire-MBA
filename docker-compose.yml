@@ -1,0 +1,39 @@
+services:
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      DATABASE_URL: "mysql://formulaire:formulaire@db:3306/formulaire"
+      AUTH_SECRET: "change-me"
+      SEED_ADMIN_EMAIL: "admin@example.com"
+      SEED_ADMIN_PASSWORD: "admin1234"
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - ./uploads:/app/uploads
+    depends_on:
+      db:
+        condition: service_healthy
+    command: >
+      sh -c "npm ci && npm run prisma:generate && npx prisma migrate deploy && npm run seed && npm run dev -- --hostname 0.0.0.0 --port 3000"
+
+  db:
+    image: mysql:8.4
+    environment:
+      MYSQL_DATABASE: formulaire
+      MYSQL_USER: formulaire
+      MYSQL_PASSWORD: formulaire
+      MYSQL_ROOT_PASSWORD: rootpassword
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-prootpassword"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+volumes:
+  mysql_data:
