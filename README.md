@@ -52,6 +52,23 @@ npm run seed
 npm run dev
 ```
 
+## Démarrage local avec Docker (MySQL inclus)
+
+Ce mode démarre automatiquement MySQL + l'app, applique les migrations Prisma, puis exécute le seed.
+
+```bash
+docker compose up --build
+```
+
+Ensuite ouvrir `http://localhost:3000`.
+
+Identifiants admin par défaut :
+- Email : `admin@example.com`
+- Mot de passe : `admin1234`
+
+Variables utiles :
+- Vous pouvez copier `docker/.env.example` vers `.env` et ajuster les valeurs.
+
 ## Production
 
 1. Build :
