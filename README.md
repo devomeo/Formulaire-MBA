@@ -68,6 +68,7 @@ Identifiants admin par défaut :
 
 Variables utiles :
 - Vous pouvez copier `docker/.env.example` vers `.env` et ajuster les valeurs.
+- Sur Windows, si Prisma échoue dans le container, utilisez le Dockerfile fourni (base Debian + OpenSSL) et relancez `docker compose up --build`.
 
 ## Production
 
