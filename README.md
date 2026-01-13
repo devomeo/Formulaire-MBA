@@ -69,6 +69,7 @@ Identifiants admin par défaut :
 Variables utiles :
 - Vous pouvez copier `docker/.env.example` vers `.env` et ajuster les valeurs.
 - Sur Windows, si Prisma échoue dans le container, utilisez le Dockerfile fourni (base Debian + OpenSSL) et relancez `docker compose up --build`.
+- Si le seed échoue, assurez-vous d'utiliser la version à jour du script `npm run seed` (qui gère correctement les options ts-node dans Docker).
 
 ## Production
 
